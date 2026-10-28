@@ -37,14 +37,19 @@ function Hero() {
           </span>
 
           <h1>
-            Thoughtful.
+            Curious.
             <br />
-            Creative.
+            Innovative.
             <br />
             <span className="accent-text">Solving Problems.</span>
           </h1>
 
           <p className="hero-description">{profile.introduction}</p>
+
+          <div className="availability">
+            <span className="availability-dot" />
+            <span>Open to new opportunities</span>
+          </div>
 
           <div className="hero-actions">
             <a className="btn btn-primary" href="#experience">
@@ -316,8 +321,8 @@ function Contact() {
         <span className="section-label">05 / CONTACT</span>
         <h2>Have something in mind?</h2>
         <p>
-          I'm always interested in interesting engineering challenges, new opportunities, and
-          meeting people who enjoy building things.
+          I'm open to full-time roles, contract opportunities, and freelance projects. Whether
+          you're hiring for a team or have something specific in mind, I'd love to hear about it.
         </p>
 
         <a className="btn btn-primary" href={`mailto:${profile.email}`}>

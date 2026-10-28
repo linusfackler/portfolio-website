@@ -200,6 +200,23 @@ a:focus-visible {
   z-index: 2;
 }
 
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6a9c78;
+  flex-shrink: 0;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
