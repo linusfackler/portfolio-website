@@ -8,7 +8,7 @@ export const profile = {
   introduction:
     'I build full-stack applications, AI-powered tools and data-driven solutions that solve real-world problems.',
   location: 'Houston, Texas',
-  email: 'linus.fackler@icloud.com',
+  email: 'linus.fackler@fackler-it.com',
   linkedIn: 'https://www.linkedin.com/in/linusfackler/',
   github: 'https://github.com/linusfackler',
 }
@@ -42,28 +42,58 @@ export const specialties = [
 
 export const experiences = [
   {
-    company: 'Crash Champions',
-    role: 'AI / Machine Learning Engineer',
-    date: '2025 — 2026',
-    technologies: ['Python', 'Azure', 'AI/ML'],
+    id: 'precocity',
+    company: 'Precocity',
+    role: 'Software Engineer / Consultant',
+    date: 'Sep 2023 – Jul 2026',
+    clients: [
+      {
+        name: 'Crash Champions',
+        role: 'AI / Machine Learning Engineer',
+        date: 'Apr 2025 – Jul 2026',
+        description:
+          'Built AI/ML workflows, data pipelines, and cloud integrations using Python, Azure, and Microsoft Fabric.',
+        technologies: ['Python', 'Azure', 'AI/ML'],
+      },
+      {
+        name: 'Nasdaq Solovis',
+        role: 'Full-Stack Software Engineer',
+        date: 'Jan 2024 – Jul 2026',
+        description:
+          'Developed enterprise application features, integrated REST APIs, and contributed to application modernization.',
+        technologies: ['C#', '.NET', 'JavaScript', 'TypeScript'],
+      },
+    ],
   },
   {
-    company: 'Nasdaq Solovis',
-    role: 'Full-Stack Software Engineer',
-    date: '2024 — 2026',
-    technologies: ['C#', '.NET', 'JavaScript', 'APIs'],
-  },
-  {
+    id: 'studia',
     company: 'Studia AI',
     role: 'Co-Founder',
-    date: '2023 — 2025',
+    date: 'May 2023 — May 2025',
+    description:
+      'Co-founded an AI-powered study platform that transforms textbooks into personalized lectures.',
     technologies: ['Swift', 'iOS mobile development', 'Python', 'JavaScript'],
+    clients: [],
   },
   {
+    id: 'fackler-it',
     company: 'Fackler IT',
-    role: 'Consultant',
-    date: '2020 — 2023',
+    role: 'Technical Consultant',
+    date: 'Aug 2020 – Aug 2023',
+    description:
+      'Supported client projects involving web development, databases, and IT infrastructure.',
     technologies: ['Infrastructure', 'Web', 'Databases'],
+    clients: [],
+  },
+  {
+    id: 'utd-research',
+    company: 'The University of Texas at Dallas',
+    role: 'Machine Learning Researcher',
+    date: 'Sep 2022 – May 2023',
+    description:
+      'Developed and evaluated computer vision models for object detection in thermal imagery, focusing on autonomous vehicle applications.',
+    technologies: ['Python', 'Computer Vision', 'Machine Learning', 'Object Detection'],
+    clients: [],
   },
 ]
 
@@ -73,7 +103,7 @@ export const projects = [
     title: 'Insurance AI Prediction System',
     category: 'AI / Machine Learning',
     description:
-      'Developed AI-powered workflows to predict insurance change requests using historical insurance and repair data.',
+      'Developed AI-powered workflows to predict change requests using historical insurance and repair data.',
     details: [
       'Built multi-agent AI workflows and retrieval-augmented generation (RAG) pipelines.',
       'Developed data processing and model integration workflows using Python, Azure, and Microsoft Fabric.',
@@ -112,7 +142,7 @@ export const projects = [
       'Designed ingestion and transformation workflows using Microsoft Fabric lakehouses, pipelines, and Eventstreams.',
       'Integrated processing workflows with Azure Functions and implemented production monitoring.',
     ],
-    technologies: ['Python', 'Microsoft Fabric', 'Azure Functions', 'SQL', 'ETL'],
+    technologies: ['Python', 'Microsoft Fabric', 'Azure Functions', 'SQL'],
     icon: 'database',
     image: null,
     theme: 'data',
@@ -158,7 +188,7 @@ export const projects = [
     title: 'CometSquare',
     category: 'HackUTD IX',
     description:
-      'A campus-focused application designed to help university students discover clubs and organizations.',
+      'A campus-focused application designed to help college students discover clubs and organizations based on their interests.',
     details: [
       'Developed a full-stack application for discovering student organizations.',
       'Integrated a machine-learning-based search algorithm using BERT to identify relationships between text queries.',
@@ -171,3 +201,11 @@ export const projects = [
     links: {},
   },
 ] as const
+
+export const education = {
+  institution: 'The University of Texas at Dallas',
+  degree: 'Bachelor of Science in Computer Science',
+  graduation: 'May 2023',
+  gpa: '3.8',
+  certification: 'Google Cloud Professional Machine Learning Engineer',
+}

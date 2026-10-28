@@ -15,7 +15,7 @@ import { SiGithub } from '@icons-pack/react-simple-icons'
 import { FaLinkedin } from 'react-icons/fa'
 
 import Header from './components/Header'
-import { profile, specialties, stats, experiences, projects } from './data/portfolio'
+import { profile, specialties, stats, experiences, projects, education } from './data/portfolio'
 
 import lightMountain from './assets/mountains.jpg'
 import darkMountain from './assets/sunset.jpg'
@@ -37,11 +37,11 @@ function Hero() {
           </span>
 
           <h1>
-            Curious.
+            Thoughtful.
             <br />
-            Practical.
+            Creative.
             <br />
-            <span className="accent-text">Focused on Impact.</span>
+            <span className="accent-text">Solving Problems.</span>
           </h1>
 
           <p className="hero-description">{profile.introduction}</p>
@@ -71,9 +71,7 @@ function Hero() {
           <span className="visual-note">
             <span>
               Based in Houston, TX
-              <small className="visual-note-subtitle">
-                (this isn't Houston, but I wish it was)
-              </small>
+              <small className="visual-note-subtitle">(let's pretend this is Houston)</small>
             </span>
             <ArrowDown size={18} />
           </span>
@@ -145,7 +143,7 @@ function About() {
     <section className="content-section container" id="about">
       <div className="section-heading">
         <span className="section-label">01 / ABOUT</span>
-        <h2>A little about me.</h2>
+        <h2>About me.</h2>
       </div>
 
       <div className="about-grid">
@@ -181,14 +179,37 @@ function Experience() {
 
       <div className="experience-list">
         {experiences.map((experience) => (
-          <article className="experience-item" key={experience.company}>
-            <div>
+          <article className="experience-item" key={experience.id}>
+            <div className="experience-main">
               <span className="experience-date">{experience.date}</span>
               <h3>{experience.company}</h3>
               <p>{experience.role}</p>
-            </div>
 
-            <span className="experience-tag">{experience.technologies.join(' · ')}</span>
+              {experience.clients.length > 0 && (
+                <div className="experience-clients">
+                  {experience.clients.map((client) => (
+                    <div className="experience-client" key={client.name}>
+                      <strong>{client.name}</strong>
+                      <span className="experience-date">{client.date}</span>
+                      <p>{client.role}</p>
+                      <p>{client.description}</p>
+                      <span className="experience-tag">{client.technologies.join(' · ')}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {'description' in experience && (
+                <div className="experience-detail-row">
+                  <p className="experience-description">{experience.description}</p>
+
+                  {'technologies' in experience && (experience.technologies ?? []).length > 0 && (
+                    <span className="experience-tag">
+                      {(experience.technologies ?? []).join(' · ')}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
           </article>
         ))}
       </div>
@@ -224,11 +245,37 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
   )
 }
 
+function Education() {
+  return (
+    <section className="content-section container" id="education">
+      <div className="section-heading">
+        <span className="section-label">03 / EDUCATION</span>
+        <h2>Education & Certification.</h2>
+      </div>
+
+      <div className="education-grid">
+        <div>
+          <h3>{education.institution}</h3>
+          <p>{education.degree}</p>
+          <span>
+            {education.graduation} · GPA {education.gpa}
+          </span>
+        </div>
+
+        <div>
+          <h3>Google Cloud Certified</h3>
+          <p>{education.certification}</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Projects() {
   return (
     <section className="content-section container" id="projects">
       <div className="section-heading">
-        <span className="section-label">03 / PROJECTS</span>
+        <span className="section-label">04 / PROJECTS</span>
         <h2>Things I've worked on.</h2>
         <p className="section-subtitle">A selection of software, data, and AI engineering work.</p>
       </div>
@@ -266,7 +313,7 @@ function Contact() {
   return (
     <section className="contact-section container" id="contact">
       <div>
-        <span className="section-label">04 / CONTACT</span>
+        <span className="section-label">05 / CONTACT</span>
         <h2>Have something in mind?</h2>
         <p>
           I'm always interested in interesting engineering challenges, new opportunities, and
@@ -324,6 +371,7 @@ export default function App() {
         <Hero />
         <About />
         <Experience />
+        <Education />
         <Projects />
         <Contact />
       </main>
