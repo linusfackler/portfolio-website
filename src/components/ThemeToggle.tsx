@@ -3,36 +3,35 @@ import { Moon, Sun } from 'lucide-react'
 
 type Theme = 'light' | 'dark'
 
-function getInitialTheme(): Theme {
-  const saved = localStorage.getItem('portfolio-theme')
-
-  if (saved === 'light' || saved === 'dark') {
-    return saved
-  }
-
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-}
-
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme)
+  const [theme, setTheme] = useState<Theme>(() =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+  )
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const updateTheme = (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? 'dark' : 'light')
+    }
+
+    media.addEventListener('change', updateTheme)
+    return () => media.removeEventListener('change', updateTheme)
+  }, [])
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     document.documentElement.style.colorScheme = theme
-    localStorage.setItem('portfolio-theme', theme)
   }, [theme])
-
-  const isDark = theme === 'dark'
 
   return (
     <button
       type="button"
       className="theme-toggle"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      {isDark ? <Sun size={19} /> : <Moon size={19} />}
+      {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
     </button>
   )
 }

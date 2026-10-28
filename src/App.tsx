@@ -2,8 +2,10 @@ import {
   ArrowDown,
   ArrowRight,
   BrainCircuit,
+  ChartNoAxesCombined,
   Code2,
   Database,
+  DatabaseZap,
   Mail,
   MapPin,
   Sparkles,
@@ -13,7 +15,7 @@ import { SiGithub } from '@icons-pack/react-simple-icons'
 import { FaLinkedin } from 'react-icons/fa'
 
 import Header from './components/Header'
-import { profile, specialties, stats } from './data/portfolio'
+import { profile, specialties, stats, experiences, projects } from './data/portfolio'
 
 import lightMountain from './assets/mountains.jpg'
 import darkMountain from './assets/sunset.jpg'
@@ -178,34 +180,47 @@ function Experience() {
       </div>
 
       <div className="experience-list">
-        <article className="experience-item">
-          <div>
-            <span className="experience-date">2025 — 2026</span>
-            <h3>Crash Champions</h3>
-            <p>AI / Machine Learning Engineering</p>
-          </div>
-          <span className="experience-tag">Python · Azure · AI/ML</span>
-        </article>
+        {experiences.map((experience) => (
+          <article className="experience-item" key={experience.company}>
+            <div>
+              <span className="experience-date">{experience.date}</span>
+              <h3>{experience.company}</h3>
+              <p>{experience.role}</p>
+            </div>
 
-        <article className="experience-item">
-          <div>
-            <span className="experience-date">2024 — 2026</span>
-            <h3>Nasdaq Solovis</h3>
-            <p>Full-Stack Software Engineering</p>
-          </div>
-          <span className="experience-tag">C# · .NET · JavaScript · APIs</span>
-        </article>
-
-        <article className="experience-item">
-          <div>
-            <span className="experience-date">2020 — 2023</span>
-            <h3>Fackler IT</h3>
-            <p>Technical Consulting</p>
-          </div>
-          <span className="experience-tag">Web · Databases · Infrastructure</span>
-        </article>
+            <span className="experience-tag">{experience.technologies.join(' · ')}</span>
+          </article>
+        ))}
       </div>
     </section>
+  )
+}
+
+function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
+  if (project.image) {
+    return (
+      <div className={`project-art project-art-${project.theme}`}>
+        <img
+          src={project.image}
+          alt={`${project.title} logo`}
+          className="project-logo"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+
+  const Icon =
+    project.icon === 'brain'
+      ? BrainCircuit
+      : project.icon === 'finance'
+        ? ChartNoAxesCombined
+        : DatabaseZap
+
+  return (
+    <div className={`project-art project-art-${project.theme}`}>
+      <Icon size={52} strokeWidth={1.4} aria-hidden="true" />
+    </div>
   )
 }
 
@@ -219,64 +234,29 @@ function Projects() {
       </div>
 
       <div className="project-grid">
-        <article className="project-card">
-          <div className="project-art project-art-ai">
-            <BrainCircuit size={48} strokeWidth={1.3} />
-          </div>
-          <div className="project-body">
-            <span className="project-category">AI / MACHINE LEARNING</span>
-            <h3>Insurance Prediction Workflows</h3>
-            <p>AI workflows and data pipelines supporting insurance change-request predictions.</p>
-            <div className="tag-list">
-              <span>Python</span>
-              <span>Azure</span>
-              <span>Microsoft Fabric</span>
-            </div>
-          </div>
-        </article>
+        {projects.map((project) => (
+          <article className="project-card" key={project.id}>
+            <ProjectVisual project={project} />
 
-        <article className="project-card">
-          <div className="project-art project-art-web">
-            <Code2 size={48} strokeWidth={1.3} />
-          </div>
-          <div className="project-body">
-            <span className="project-category">FULL-STACK DEVELOPMENT</span>
-            <h3>Investment Platform Engineering</h3>
-            <p>
-              Enterprise application development and modernization for financial portfolio
-              management.
-            </p>
-            <div className="tag-list">
-              <span>JavaScript</span>
-              <span>REST APIs</span>
-              <span>.NET</span>
-            </div>
-          </div>
-        </article>
+            <div className="project-body">
+              <span className="project-category">{project.category}</span>
 
-        <article className="project-card">
-          <div className="project-art project-art-data">
-            <Database size={48} strokeWidth={1.3} />
-          </div>
-          <div className="project-body">
-            <span className="project-category">DATA ENGINEERING</span>
-            <h3>Cloud Data Pipelines</h3>
-            <p>
-              Data ingestion, transformation, integration, and monitoring for production cloud
-              workflows.
-            </p>
-            <div className="tag-list">
-              <span>Python</span>
-              <span>Fabric</span>
-              <span>Azure Functions</span>
+              <h3>{project.title}</h3>
+
+              <p>{project.description}</p>
+
+              <div className="tag-list">
+                {project.technologies.map((technology) => (
+                  <span key={technology}>{technology}</span>
+                ))}
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        ))}
       </div>
 
       <p className="projects-note">
-        Project details are based on professional work; proprietary implementation details are not
-        published.
+        Professional projects are described at a high level to respect client confidentiality.
       </p>
     </section>
   )

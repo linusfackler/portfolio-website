@@ -549,21 +549,33 @@ a:focus-visible {
   text-align: right;
 }
 
+/* =========================================
+   PROJECTS
+   ========================================= */
+
+/* Grid layout */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   margin-top: 32px;
+  align-items: stretch;
 }
 
+/* Individual project cards */
 .project-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   overflow: hidden;
+
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 15px;
-  background: var(--surface);
+
   transition:
-    transform 200ms,
-    box-shadow 200ms;
+    transform 200ms ease,
+    box-shadow 200ms ease;
 }
 
 .project-card:hover {
@@ -571,49 +583,200 @@ a:focus-visible {
   box-shadow: var(--shadow);
 }
 
+/* =========================================
+   PROJECT VISUALS
+   ========================================= */
+
+/* Shared visual container for icons and logos */
 .project-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 100%;
   height: 170px;
-  display: grid;
-  place-items: center;
+  overflow: hidden;
 }
 
+/* Lucide icons */
+.project-art > svg {
+  width: 48px;
+  height: 48px;
+  stroke-width: 1.5;
+}
+
+/* Custom SVG logos */
+.project-logo {
+  width: auto;
+  height: auto;
+  max-width: 160px;
+  max-height: 65px;
+  object-fit: contain;
+}
+
+/* =========================================
+   PROJECT COLORS
+   ========================================= */
+
+/* Insurance AI */
 .project-art-ai {
   background: #eee3e1;
   color: #af746c;
 }
 
-.project-art-web {
-  background: #e2e9f3;
-  color: #718db7;
+/* Investment Platform */
+.project-art-finance {
+  background: #f1e7db;
+  color: #a77c50;
 }
 
+/* Cloud Data Pipelines */
 .project-art-data {
   background: #e7ebe0;
   color: #819577;
 }
 
+/* Lura */
+.project-art-lura {
+  background: #e5eee5;
+  color: #67977b;
+}
+
+/* CometSquare */
+.project-art-cometsquare {
+  background: #eee5dc;
+  color: #a77c50;
+}
+
+/* Studia */
+.project-art-studia {
+  background: #e9e4f0;
+  color: #9081aa;
+}
+
+/* Recolor imported black SVG logos */
+.project-art-lura .project-logo {
+  filter: brightness(0) saturate(100%) invert(55%) sepia(17%) saturate(780%) hue-rotate(91deg)
+    brightness(92%);
+}
+
+.project-art-cometsquare .project-logo {
+  filter: brightness(0) saturate(100%) invert(55%) sepia(19%) saturate(750%) hue-rotate(345deg)
+    brightness(94%);
+  max-width: 240px;
+  max-height: 130px;
+  width: 100%;
+  height: 130px;
+}
+
+.project-art-studia .project-logo {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(12%) saturate(670%) hue-rotate(215deg)
+    brightness(95%);
+}
+
+/* =========================================
+   PROJECT CONTENT
+   ========================================= */
+
 .project-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  min-width: 0;
   padding: 23px;
 }
 
 .project-category {
+  display: block;
+  margin-bottom: 10px;
+
   color: var(--accent);
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .project-body h3 {
-  margin: 11px 0;
+  margin: 0 0 12px;
+
+  color: var(--text);
   font-size: 19px;
+  font-weight: 700;
   letter-spacing: -0.5px;
+  line-height: 1.35;
 }
 
 .project-body p {
-  min-height: 80px;
+  margin: 0 0 22px;
+
   color: var(--text-muted);
   font-size: 13px;
   line-height: 1.8;
+}
+
+/* Technology tags */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 7px;
+
+  margin-top: auto;
+}
+
+.tag-list span {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 9px;
+  border-radius: 6px;
+
+  background: var(--surface-soft);
+  color: var(--text-muted);
+
+  font-size: 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Confidentiality note */
+.projects-note {
+  margin-top: 21px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   RESPONSIVE PROJECT GRID
+   ========================================= */
+
+@media (max-width: 950px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .project-art {
+    height: 170px;
+  }
+
+  .project-body {
+    padding: 22px;
+  }
+
+  .project-body p {
+    margin-bottom: 24px;
+  }
 }
 
 .tag-list {
